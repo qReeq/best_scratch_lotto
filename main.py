@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-selenium_driver_path = "C:/Users/eRq/Desktop/chromedriver/chromedriver.exe"
+selenium_driver_path = "DRIVER PATH" # THERE YOU HAVE ADD YOUR LOCALLY SELENIUM DRIVER PATH
 driver = webdriver.Chrome(executable_path=selenium_driver_path)
 driver.maximize_window()
 driver.get("https://www.lotto.pl/zdrapki/katalog-zdrapek")
