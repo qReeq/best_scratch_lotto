@@ -1,8 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-selenium_driver_path = "DRIVER PATH" # THERE YOU HAVE ADD YOUR LOCALLY SELENIUM DRIVER PATH
-driver = webdriver.Chrome(executable_path=selenium_driver_path)
+driver = webdriver.Chrome(executable_path="chromedriver/chromedriver.exe")
 driver.maximize_window()
 driver.get("https://www.lotto.pl/zdrapki/katalog-zdrapek")
 
@@ -18,7 +17,7 @@ def get_return_percentage(url):
     """
     driver.get(url)
 
-    # Getting number of all tickets for one actual scratch
+    # Getting number of all tickets for actual scratch
     quota = \
         driver.find_element(By.XPATH,
                             '/html/body/div[1]/div/div/div[2]/div/div[3]/div/div[2]/div[2]/div[3]/strong').get_attribute(
@@ -50,7 +49,10 @@ def get_return_percentage(url):
         formatted_price = price.strip().replace("\xa0", "").replace("zł", "").strip()
 
         win_prizes.append(formatted_price)
-        left_tickets.append(driver_tickets.get_attribute('textContent'))
+        if driver_tickets.get_attribute('textContent') == "-":
+            left_tickets.append(0)
+        else:
+            left_tickets.append(driver_tickets.get_attribute('textContent'))
 
     int_win_prizes = [int(n) for n in win_prizes]
     int_left_tickets = [int(n) for n in left_tickets]
